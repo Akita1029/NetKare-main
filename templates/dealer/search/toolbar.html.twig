@@ -1,0 +1,15 @@
+<div class="flex justify-between p-5 shadow gap-3">
+	<div class="inline-flex gap-5">
+		{{ form_start(form1, {'attr': {'class' : 'inline-flex gap-2'}}) }}
+			{{ form_widget(form1.school, {'attr': {'class': 'form-widget'}}) }}
+			<button type="submit" class="btn btn-primary">{% trans %}toolbar.buttons.switch.label{% endtrans %}</button>
+		{{ form_end(form1) }}
+		{# {{ form_start(form2, {'attr': {'class' : 'inline-flex gap-2'}}) }}
+			{{ form_widget(form2.search, {'attr': {'class': 'form-widget'}}) }}
+			<button type="submit" class="btn btn-primary">{% trans %}toolbar.buttons.search.label{% endtrans %}</button>
+		{{ form_end(form2) }} #}
+	</div>
+	<div>
+		<a href="{{ path('dealer_security_logout') }}" class="btn btn-danger">{% trans %}toolbar.buttons.logout.label{% endtrans %}</a>
+	</div>
+</div>

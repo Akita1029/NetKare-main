@@ -1,0 +1,76 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% set title = 'Sipariş Detayı' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<div class="flex justify-between items-center mb-5">
+		<h1>{{ title }}</h1>
+		<div>
+			{{ form_start(form, {'attr': {'class': 'inline-flex gap-3'}}) }}
+                {{ form_widget(form.status, {'attr': {'class': 'form-widget'}}) }}
+                <button type="submit" class="btn btn-primary">Güncelle</button>
+			{{ form_end(form) }}
+		</div>
+	</div>
+
+    {% for label, messages in app.flashes %}
+		{% for message in messages %}
+			<div class="alert alert-{{ label }} mb-3">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endfor %}
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th class="w-48"></th>
+				<th>Ürün Adı</th>
+				<th>Ürün Özellikleri</th>
+				<th>Albüm Adı</th>
+				<th>Sınıflar</th>
+				<th>Laboratuvar Referans Kodu</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for orderLine in order.orderLines %}
+				<tr>
+					<td>
+						<img src="{{ asset('uploads/products/' ~ orderLine.product.imageFilename) }}" alt="{{ orderLine.product.title }}" class="w-full">
+					</td>
+					<td>
+						{{ orderLine.product.title }}
+					</td>
+					<td>
+						{% if orderLine.productOptions|length > 0 %}
+							<ul>
+								{% for productOption in orderLine.productOptions %}
+									<li>{{ productOption.title }}</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+					</td>
+					<td>
+						{{ orderLine.album.name }}
+					</td>
+					<td>
+						{% if orderLine.classrooms|length > 0 %}
+							<ul>
+								{% for classroom in orderLine.classrooms %}
+									<li>{{ classroom.name }}</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+					</td>
+					<td>
+						{{ orderLine.laboratoryReferance }}
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

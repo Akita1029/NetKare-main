@@ -1,0 +1,17 @@
+{% extends 'student/layout.html.twig' %}
+
+{% block title %}
+	Anasayfa
+{% endblock %}
+
+{% block content %}
+	{% for label, messages in app.flashes %}
+		{% for message in messages %}
+			<div class="alert alert-{{ label }} mb-5">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endfor %}
+	<h1 class="mb-5">Öğrenci Paneli</h1>
+	Hoşgeldiniz, navigasyon için sol menüyü kullanabilirsiniz.
+{% endblock %}

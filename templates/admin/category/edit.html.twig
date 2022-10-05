@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'category.titles.edit'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block body %}
+	<h1 class="mb-5">{{ title }}</h1>
+
+	{{ include('admin/category/_form.html.twig') }}
+{% endblock %}

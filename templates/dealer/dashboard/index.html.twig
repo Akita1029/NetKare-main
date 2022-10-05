@@ -1,0 +1,80 @@
+{% extends 'dealer/layout.html.twig' %}
+
+{% set title = 'dashboard.titles.index'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<div class="container mx-auto">
+		<div class="mb-10">
+			<h3 class="text-2xl mb-5 tracking-widest">Yeni Ürünler</h3>
+			<div class="grid grid-cols-4 gap-5">
+				{% for product in products %}
+					<div class="text-center rounded bg-gray-100 overflow-hidden">
+						<img src="{{ asset('uploads/products/' ~ product.imageFilename) }}" alt="{{ product.title }}" class="w-full h-52 object-cover">
+						<div class="p-4">
+							<div>
+								<a href="#" class="text-yellow-500">{{ product.title }}</a>
+							</div>
+							<div class="mb-3">{{ product.price | format_currency('TRY') }}</div>
+							<div>
+								<a href="#" class="bg-gray-800 hover:bg-gray-900 text-white px-6 py-2 rounded">Detay</a>
+							</div>
+						</div>
+					</div>
+				{% else %}
+					Ürün bulunamadı.
+				{% endfor %}
+			</div>
+		</div>
+		<div class="mb-10">
+			<h3 class="text-2xl mb-5 tracking-widest">Duyurular</h3>
+			<div class="flex relative bg-gray-100 border border-gray-200 min-h-[300px]">
+				<div>
+					<nav class="h-full">
+						<ul class="w-64 border-r border-gray-200 h-full">
+							{% for announcement in announcements %}
+								<li class="group hover:bg-gray-200">
+									<a href="#" class="block px-5 py-3">{{ announcement.title }}</a>
+									<div class="absolute top-0 left-64 right-0 hidden group-hover:block h-full overflow-y-auto">
+										<h3 class="bg-gray-900 text-white px-4 py-2 uppercase text-2xl border-l-4 border-yellow-500">{{ announcement.title }}</h3>
+										<div class="px-6 py-4">
+											<img src="{{ asset('uploads/announcements/' ~ announcement.imageFilename) }}" alt="{{ announcement.title }}" class="w-32 float-left mr-3 mb-3">
+											{{ announcement.description }}
+										</div>
+									</div>
+								</li>
+							{% endfor %}
+						</ul>
+					</nav>
+				</div>
+				<div></div>
+			</div>
+		</div>
+		<div class="mb-10">
+			<h3 class="text-2xl mb-5 tracking-widest">Okullarım</h3>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Logo</th>
+						<th>Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for school in schools %}
+						<tr>
+							<td><img src="{{ asset('uploads/schools/' ~ school.logoFilename) }}" alt="" class="h-16"></td>
+							<td>{{ school.name }}</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="4">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

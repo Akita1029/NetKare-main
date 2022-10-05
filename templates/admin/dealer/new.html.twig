@@ -1,0 +1,13 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% set title = 'dealer.titles.new'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">{{ title }}</h1>
+
+	{{ include('admin/dealer/_form.html.twig') }}
+{% endblock %}

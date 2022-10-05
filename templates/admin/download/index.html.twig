@@ -1,0 +1,51 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% set title = 'download.titles.index'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">{{ title }}</h1>
+
+    {{ form_start(form, {'attr': {'class': 'mb-5'}}) }}
+		{{ form_row(form.dealer) }}
+		{{ form_row(form.school) }}
+		{{ form_row(form.type) }}
+        <button type="submit" class="btn btn-primary">Talep Et</button>
+    {{ form_end(form) }}
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Okul</th>
+				<th>Tür</th>
+				<th>Durum</th>
+                <th>Talep Tarihi</th>
+                <th>Cevap Tarihi</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for download in downloads %}
+				<tr>
+					<td>{{ download.school.name }}</td>
+					<td>{{ ('download.types.' ~ download.type)|trans }}</td>
+					<td>{{ ('download.statuses.' ~ download.status)|trans }}</td>
+                    <td>{{ download.requestDate|date('d-m-Y') }}</td>
+                    <td>{{ download.responseDate ? download.responseDate|date('d-m-Y') : '' }}</td>
+					<td class="text-right">
+                        {% if download.status is same as(constant('App\\Entity\\Download::STATUS_DONE')) %}
+                            <a href="{{ path('dealer_download_download', {'id': download.id}) }}" class="btn btn-primary">İndir</a>
+                        {% endif %}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">{% trans %}no_record{% endtrans %}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

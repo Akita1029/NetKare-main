@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Giriş
+{% endblock %}
+
+{% block body %}
+	<div class="p-3 mx-auto w-[350px] max-w-full box-content">
+		<img src="{{ asset('logo-1.svg') }}" alt="" class="w-[250px] mx-auto mb-3">
+		{% if error %}
+			<div class="alert alert-danger mb-3">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+		{% endif %}
+		<form action="{{ path('admin_security_login') }}" method="post" class="rounded px-4 py-5 grid gap-4 border-t-2 border-yellow-400 shadow bg-gray-100">
+			<div>
+				<label for="email" class="form-label">Eposta</label>
+				<input type="email" name="email" id="email" class="form-widget mt-2 shadow">
+			</div>
+			<div>
+				<label for="password" class="form-label">Şifre</label>
+				<input type="password" name="password" id="password" class="form-widget mt-2 shadow">
+			</div>
+			<div class="flex justify-end">
+				<button type="submit" class="bg-white hover:bg-gray-100 border-t-2 rounded border-yellow-400 px-3 py-2 shadow">Giriş</button>
+			</div>
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+		</form>
+	</div>
+{% endblock %}

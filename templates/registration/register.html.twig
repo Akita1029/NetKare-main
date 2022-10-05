@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <div class="p-3 mx-auto w-[350px] max-w-full box-content">
+        <img src="{{ asset('logo-1.svg') }}" alt="" class="w-[250px] mx-auto mb-3">
+        {{ form_start(form, {'attr': {'class': 'rounded px-4 py-5 grid gap-3 border-t-2 border-yellow-400 shadow bg-gray-100'}}) }}
+            {{ form_row(form.email, {'row_attr': {'class': 'mb-3'},'label_attr': {'class': 'form-label'}, 'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.plainPassword, {'label': 'Password', 'row_attr': {'class': 'mb-3'},'label_attr': {'class': 'form-label'}, 'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.companyName, {'row_attr': {'class': 'mb-3'},'label_attr': {'class': 'form-label'}, 'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.authorizedPersonName, {'row_attr': {'class': 'mb-3'},'label_attr': {'class': 'form-label'}, 'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.address, {'row_attr': {'class': 'mb-3'},'label_attr': {'class': 'form-label'}, 'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.phone, {'row_attr': {'class': 'mb-3'},'label_attr': {'class': 'form-label'}, 'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.phoneGsm, {'row_attr': {'class': 'mb-3'},'label_attr': {'class': 'form-label'}, 'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.fax, {'row_attr': {'class': 'mb-3'},'label_attr': {'class': 'form-label'}, 'attr': {'class': 'form-control'}}) }}
+            <div class="flex justify-between">
+                {{ form_row(form.agreeTerms, {'row_attr': {'class': 'flex items-center'}, 'label_attr': {'class': 'order-last ml-2'}}) }}
+                <button type="submit" class="bg-white hover:bg-gray-100 border-t-2 rounded border-yellow-400 px-3 py-2 shadow">Sign Up</button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

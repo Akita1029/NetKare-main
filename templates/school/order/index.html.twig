@@ -1,0 +1,51 @@
+{% extends 'school/layout.html.twig' %}
+
+{% set title = 'Siparişler' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">{{ title }}</h1>
+
+	<table class="table mb-4">
+		<thead>
+			<tr>
+				<th>
+					Durum
+				</th>
+				<th>
+					Ürün Adeti
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for order in orders %}
+				<tr>
+					<td>
+						{{ ('order.statuses.' ~ order.status)|trans }}
+					</td>
+					<td>
+						{{ order.orderLines|length }}
+					</td>
+					<td class="text-right">
+						{% if order.status is constant('App\\Entity\\Order::STATUS_PENDING') %}
+							<a href="{{ path('school_order_line_student_included', {'id': order.id}) }}" class="btn btn-primary">Ürün Dahil Etme Formu</a>
+						{% endif %}
+						{% if order.status is constant('App\\Entity\\Order::STATUS_SHIPPED') %}
+							<a href="{{ path('school_order_line_student_missed', {'id': order.id}) }}" class="btn btn-primary">Eksik Ürün Talep Formu</a>
+						{% endif %}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">{% trans %}no_record{% endtrans %}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{{ render(controller('App\\Controller\\PaginatorController::index', {'paginator': orders, 'paginatorPerPage': paginatorPerPage})) }}
+{% endblock %}

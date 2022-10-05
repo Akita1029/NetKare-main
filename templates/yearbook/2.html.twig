@@ -1,0 +1,13 @@
+{% extends "yearbook/layout.html.twig" %}
+
+{% block content %}
+	<div class="container text-center text-2xl">
+		<ul class="space-y-5">
+			{% for student in students %}
+				<li>
+					<a href="{{ student.slug ~ '.html' }}">{{ student.name ~ ' ' ~ student.surname }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

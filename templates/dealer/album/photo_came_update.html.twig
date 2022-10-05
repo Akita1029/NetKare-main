@@ -1,0 +1,35 @@
+{% extends 'dealer/layout.html.twig' %}
+
+{% set title = 'albumPhoto.titles.index'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<div class="flex justify-between mb-5">
+		<div>
+			<h1>{{ title }}</h1>
+		</div>
+	</div>
+
+	{{ form_start(form) }}
+	<div class="mt-2">
+		<div class="mb-3">
+			{{ form_label(form.students) }}
+			{{ form_errors(form.students) }}
+			<div id="students-list" data-prototype="{{ form_widget(form.students.vars.prototype)|e }}" data-widget-tags="{{ '<div class="flex gap-3 mb-3 items-end item"></div>'|e }}" data-widget-counter="{{ form.students|length }}">
+				{% for student in form.students %}
+					<div class="flex gap-3 mb-3 items-end item">
+						{{ form_row(student, {'row_attr': {'class': 'flex-1'}}) }}
+						<button type="button" class="btn btn-danger del-row" data-row-selector=".item">Sil</button>
+					</div>
+				{% endfor %}
+			</div>
+			<button type="button" class="add-row btn btn-primary" data-list-selector="#students-list">Öğrenci Ekle</button>
+		</div>
+		{{ form_row(form.photos) }}
+	</div>
+	<button type="submit" class="btn btn-primary">Kaydet</button>
+	{{ form_end(form) }}
+{% endblock %}

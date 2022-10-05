@@ -1,0 +1,15 @@
+{% extends 'student/layout.html.twig' %}
+
+{% block title %}
+	Anı Yazılarım
+{% endblock %}
+
+{% block content %}
+    {% set title = sender is same as(receiver) ? 'Kendim' : '"' ~ receiver.name ~ ' ' ~ receiver.surname ~ '"' %}
+	<h1 class="mb-5">{{ title }} İçin Anı Yazım</h1>
+
+	{{ form_start(form) }}
+        {{ form_widget(form.text, {'attr': {'class': 'form-widget mb-3', 'rows': 10}}) }}
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+	{{ form_end(form) }}
+{% endblock %}

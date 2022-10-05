@@ -1,0 +1,77 @@
+{{ form_start(form) }}
+    {{ form_row(form.image) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.price) }}
+    {{ form_row(form.category) }}
+    <div class="mb-4">
+        <label for="product-options-list" class="form-label">{% trans %}product.labels.options{% endtrans %}</label>
+        {{ form_errors(form.options) }}
+        <div class="mt-2">
+            <div id="product-options-list"
+            data-prototype="{{ (form_row(form.options.vars.prototype.title, {'row_attr': {'class': 'flex-1'}, 'label_attr': {'class': 'form-label py-2'}, 'attr': {'class': 'form-widget'}}) ~ form_row(form.options.vars.prototype.price, {'row_attr': {'class': 'flex-1'}, 'label_attr': {'class': 'form-label py-2'}, 'attr': {'class': 'form-widget'}}) ~ '<div><button type="button" class="btn btn-danger del-row" data-row-selector=".item">Sil</button></div>')|e }}"
+            data-widget-tags="{{ '<div class="flex gap-3 mb-3 items-end item"></div>'|e }}"
+            data-widget-counter="{{ form.options|length }}">
+                {% for option in form.options %}
+                    <div class="flex gap-3 mb-3 items-end item">
+                        {{ form_row(option.title, {'row_attr': {'class': 'flex-1'}}) }}
+                        {{ form_row(option.price, {'row_attr': {'class': 'flex-1'}}) }}
+                        <button type="button" class="btn btn-danger del-row" data-row-selector=".item">Sil</button>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="button"
+            class="add-row btn btn-primary"
+            data-list-selector="#product-options-list">Seçenek Ekle</button>
+        </div>
+    </div>
+    <div class="mb-4">
+        <label for="product-templates-list" class="form-label">{% trans %}product.labels.templates{% endtrans %}</label>
+        {{ form_errors(form.templates) }}
+        <div class="mt-2">
+            <div id="product-templates-list"
+            data-prototype="{{ (form_row(form.templates.vars.prototype.title, {'row_attr': {'class': 'flex-1'}, 'label_attr': {'class': 'form-label py-2'}, 'attr': {'class': 'form-widget'}}) ~ form_row(form.templates.vars.prototype.preview1Title, {'row_attr': {'class': 'flex-1'}, 'label_attr': {'class': 'form-label py-2'}, 'attr': {'class': 'form-widget'}}) ~ form_row(form.templates.vars.prototype.preview1Image, {'row_attr': {'class': 'flex-1'}, 'label_attr': {'class': 'form-label py-2'}, 'attr': {'class': 'form-widget'}}) ~ form_row(form.templates.vars.prototype.preview2Title, {'row_attr': {'class': 'flex-1'}, 'label_attr': {'class': 'form-label py-2'}, 'attr': {'class': 'form-widget'}}) ~ form_row(form.templates.vars.prototype.preview2Image, {'row_attr': {'class': 'flex-1'}, 'label_attr': {'class': 'form-label py-2'}, 'attr': {'class': 'form-widget'}}) ~ '<button type="button" class="btn btn-danger del-row" data-row-selector=".item">Sil</button>')|e }}"
+            data-widget-tags="{{ '<div class="flex gap-3 mb-3 items-end item"></div>'|e }}"
+            data-widget-counter="{{ form.templates|length }}">
+                {% for template in form.templates %}
+                    <div class="flex gap-3 mb-3 items-end item">
+                        {{ form_row(template.title, {'row_attr': {'class': 'flex-1'}}) }}
+                        {{ form_row(template.preview1Title, {'row_attr': {'class': 'flex-1'}}) }}
+                        {{ form_row(template.preview1Image, {'row_attr': {'class': 'flex-1'}}) }}
+                        {{ form_row(template.preview2Title, {'row_attr': {'class': 'flex-1'}}) }}
+                        {{ form_row(template.preview2Image, {'row_attr': {'class': 'flex-1'}}) }}
+                        <button type="button" class="btn btn-danger del-row" data-row-selector=".item">Sil</button>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="button"
+            class="add-row btn btn-primary"
+            data-list-selector="#product-templates-list">Şablon Ekle</button>
+        </div>
+    </div>
+    {{ form_row(form.knifeTemplate) }}
+    {{ form_row(form.canSelectMultipleOption) }}
+    {{ form_row(form.canFillLaboratoryReference) }}
+    {{ form_row(form.canSelectTemplate) }}
+    <div class="mb-4">
+        <label for="product-fields-list" class="form-label">{% trans %}product.labels.fields{% endtrans %}</label>
+        {{ form_errors(form.fields) }}
+        <div class="mt-2">
+            <div id="product-fields-list"
+            data-prototype="{{ (form_row(form.fields.vars.prototype.description, {'row_attr': {'class': 'flex-1'}, 'label_attr': {'class': 'form-label py-2'}, 'attr': {'class': 'form-widget'}}) ~ '<button type="button" class="btn btn-danger del-row" data-row-selector=".item">Sil</button>')|e }}"
+            data-widget-tags="{{ '<div class="flex gap-3 mb-3 items-end item"></div>'|e }}"
+            data-widget-counter="{{ form.fields|length }}">
+                {% for field in form.fields %}
+                    <div class="flex gap-3 mb-3 items-end item">
+                        {{ form_row(field.description, {'row_attr': {'class': 'flex-1'}}) }}
+                        <button type="button" class="btn btn-danger del-row" data-row-selector=".item">Sil</button>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="button"
+            class="add-row btn btn-primary"
+            data-list-selector="#product-fields-list">Alan Ekle</button>
+        </div>
+    </div>
+    <button class="btn btn-primary">{% trans %}buttons.save.label{% endtrans %}</button>
+{{ form_end(form) }}

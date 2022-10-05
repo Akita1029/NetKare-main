@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="assets/stylesheets/yearbook.css">
+	<link rel="stylesheet" href="assets/stylesheets/fancybox.css">
+{% endblock %}
+
+{% block javascripts %}
+	<script src="assets/javascripts/fancybox.umd.js"></script>
+{% endblock %}
+
+{% block body %}
+	<div class="min-w-screen min-h-screen bg-[url('../images/bg.jpg')] bg-center bg-cover">
+		<div class="bg-[#1F2937] text-white py-3 border-b-8 border-[#D4B060] mb-10">
+			<div class="container">
+				<div class="flex justify-center items-center gap-10">
+					<img src="assets/images/logo.png" alt="" class="w-20 h-20">
+					<div class="text-center uppercase">
+						{{ school.name }}
+						<br>
+						MEZUNLARI
+					</div>
+				</div>
+			</div>
+		</div>
+		{% block content %}{% endblock %}
+		<div class="bg-[#1F2937] text-white py-6 text-sm relative mt-[36rem]">
+			<div class="absolute bottom-full inset-x-0">
+				<div class="container">
+					<img src="assets/images/bottom.svg" alt="" class="w-full">
+				</div>
+			</div>
+			<div class="container text-center">
+				Netkare Ajans projesidir. Tüm hakları saklıdır. Copyright©
+				{{ 'now' | date('Y') }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

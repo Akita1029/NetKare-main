@@ -1,0 +1,46 @@
+{% extends 'operator/layout.html.twig' %}
+
+{% set title = 'Galeri' %}
+
+{% block title %}
+	{{title}}
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">{{title}}</h1>
+
+	<div class="flex gap-8">
+		<div class="flex-1">
+			<h2 class="text-xl mb-3">Resimler</h2>
+			<div class="grid grid-cols-3 gap-3">
+				{% for image in images %}
+					<div class="border rounded p-3 flex flex-col justify-between items-center gap-3">
+						<img src="{{cdn_path ~ '/' ~ image.image.asset.name}}" alt="" class="rounded">
+						<form method="post" action="{{ path('operator_gallery_image_delete', {'id': image.id}) }}" onsubmit="return confirm('{% trans %}buttons.delete.confirm{% endtrans %}');" class="inline-block">
+							<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
+							<button class="btn btn-danger">{% trans %}buttons.delete.label{% endtrans %}</button>
+						</form>
+					</div>
+				{% else %}
+					<div class="alert alert-info">Galeride resim bulunmuyor.</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="flex-1">
+			<h2 class="text-xl mb-3">Videolar</h2>
+			<div class="grid grid-cols-3 gap-3">
+				{% for video in videos %}
+					<div class="border rounded p-3 flex flex-col justify-between items-center gap-3">
+						<iframe class="w-full aspect-video" src="https://www.youtube.com/embed/{{video.youtubeVideoId}}" allowfullscreen></iframe>
+						<form method="post" action="{{ path('operator_gallery_video_delete', {'id': video.id}) }}" onsubmit="return confirm('{% trans %}buttons.delete.confirm{% endtrans %}');" class="inline-block">
+							<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ video.id) }}">
+							<button class="btn btn-danger">{% trans %}buttons.delete.label{% endtrans %}</button>
+						</form>
+					</div>
+				{% else %}
+					<div class="alert alert-info">Galeride video bulunmuyor.</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

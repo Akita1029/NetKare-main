@@ -1,0 +1,97 @@
+security:
+    enable_authenticator_manager: true
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
+        App\Entity\Admin:
+            algorithm: auto
+        App\Entity\Dealer:
+            algorithm: auto
+        App\Entity\Operator:
+            algorithm: auto
+        App\Entity\School:
+            algorithm: auto
+        App\Entity\Student:
+            algorithm: auto
+    providers:
+        app_admin_provider:
+            entity:
+                class: App\Entity\Admin
+                property: email
+        app_dealer_provider:
+            entity:
+                class: App\Entity\Dealer
+                property: email
+        app_operator_provider:
+            entity:
+                class: App\Entity\Operator
+                property: id
+        app_school_provider:
+            entity:
+                class: App\Entity\School
+                property: id
+        app_student_provider:
+            entity:
+                class: App\Entity\Student
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        admin:
+            lazy: true
+            provider: app_admin_provider
+            custom_authenticator: App\Security\AdminAuthenticator
+            pattern: ^/admin
+            logout:
+                path: admin_security_logout
+                target: admin_security_login
+        dealer:
+            lazy: true
+            provider: app_dealer_provider
+            custom_authenticator: App\Security\DealerAuthenticator
+            pattern: ^/dealer
+            logout:
+                path: dealer_security_logout
+                target: dealer_security_login
+        operator:
+            lazy: true
+            provider: app_operator_provider
+            custom_authenticator: App\Security\OperatorAuthenticator
+            pattern: ^/operator
+            logout:
+                path: operator_security_logout
+                target: operator_security_login
+        school:
+            lazy: true
+            provider: app_school_provider
+            custom_authenticator: App\Security\SchoolAuthenticator
+            pattern: ^/school
+            logout:
+                path: school_security_logout
+                target: school_security_login
+        student:
+            lazy: true
+            provider: app_student_provider
+            custom_authenticator: App\Security\StudentAuthenticator
+            pattern: ^/student
+            logout:
+                path: student_security_logout
+                target: student_security_login
+    access_control:
+        - { path: ^/admin/login, roles: PUBLIC_ACCESS }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/dealer/login, roles: PUBLIC_ACCESS }
+        - { path: ^/dealer, roles: ROLE_DEALER }
+        - { path: ^/operator/login, roles: PUBLIC_ACCESS }
+        - { path: ^/operator, roles: ROLE_OPERATOR }
+        - { path: ^/school/login, roles: PUBLIC_ACCESS }
+        - { path: ^/school, roles: ROLE_SCHOOL }
+        - { path: ^/student/login, roles: PUBLIC_ACCESS }
+        - { path: ^/student, roles: ROLE_STUDENT }
+when@test:
+    security:
+        password_hashers:
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4
+                time_cost: 3
+                memory_cost: 10

@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dealer{% endblock %}
+
+{% block body %}
+    <h1>Dealer</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ dealer.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ dealer.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ dealer.roles ? dealer.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ dealer.password }}</td>
+            </tr>
+            <tr>
+                <th>IsVerified</th>
+                <td>{{ dealer.isVerified ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CompanyName</th>
+                <td>{{ dealer.companyName }}</td>
+            </tr>
+            <tr>
+                <th>AuthorizedPersonName</th>
+                <td>{{ dealer.authorizedPersonName }}</td>
+            </tr>
+            <tr>
+                <th>AddressLine1</th>
+                <td>{{ dealer.addressLine1 }}</td>
+            </tr>
+            <tr>
+                <th>AddressLine2</th>
+                <td>{{ dealer.addressLine2 }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ dealer.phone }}</td>
+            </tr>
+            <tr>
+                <th>PhoneGsm</th>
+                <td>{{ dealer.phoneGsm }}</td>
+            </tr>
+            <tr>
+                <th>Fax</th>
+                <td>{{ dealer.fax }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_dealer_index') }}">back to list</a>
+
+    <a href="{{ path('admin_dealer_edit', {'id': dealer.id}) }}">edit</a>
+
+    {{ include('admin/dealer/_delete_form.html.twig') }}
+{% endblock %}

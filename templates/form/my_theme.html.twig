@@ -1,0 +1,59 @@
+{% use 'form_div_layout.html.twig' %}
+
+{% block form_row %}
+    {% set row_attr = row_attr|merge({ class: row_attr.class|default(row_class|default('mb-4')) }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block widget_attributes %}
+    {% set attr = attr|merge({ class: attr.class|default(widget_class|default('form-widget mt-2')) }) %}
+    {{ parent() }}
+{% endblock widget_attributes %}
+
+{% block form_label %}
+    {% set label_attr = label_attr|merge({ class: label_attr.class|default(label_class|default('form-label')) }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block choice_widget_expanded %}
+    {% set attr = attr|merge({ class: attr.class|default('mt-2') }) %}
+    <div {{ block('widget_container_attributes') }}>
+        {%- for child in form %}
+            <div class="inline-flex items-center mr-3">
+                {{ form_widget(child) }}
+                {{ form_label(child, null, { translation_domain: choice_translation_domain }) }}
+            </div>
+        {% endfor -%}
+    </div>
+{% endblock choice_widget_expanded %}
+
+{% block checkbox_row %}
+    {% set row_attr = row_attr|merge({ class: row_attr.class|default(row_class|default('mb-3')) }) %}
+    {% set widget_attr = {} %}
+    {% if help is not empty %}
+        {% set widget_attr = {attr: {'aria-describedby': id ~"_help"}} %}
+    {% endif %}
+    <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+        {{ form_errors(form) }}
+        <div class="inline-flex items-center">
+            {{ form_widget(form, widget_attr) }}
+            {{ form_label(form) }}
+        </div>
+        {{ form_help(form) }}
+    </div>
+{% endblock checkbox_row %}
+
+{% block checkbox_widget %}
+    {% set widget_class = widget_class|default('mr-2') %}
+    {{ parent() }}
+{% endblock checkbox_widget %}
+
+{% block radio_widget %}
+    {% set widget_class = widget_class|default('mr-2') %}
+    {{ parent() }}
+{% endblock radio_widget %}
+
+{% block submit_widget %}
+    {% set widget_class = widget_class|default('btn btn-primary') %}
+    {{ parent() }}
+{% endblock submit_widget %}

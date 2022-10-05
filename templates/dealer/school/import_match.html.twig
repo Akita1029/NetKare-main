@@ -1,0 +1,20 @@
+{% extends 'dealer/layout.html.twig' %}
+
+{% block title %}
+	İçe Aktar
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">İçe Aktar</h1>
+
+	{{ form_start(form) }}
+	{{ form_row(form.classroom) }}
+	{{ form_row(form.schoolNumber) }}
+	{{ form_row(form.name) }}
+	{{ form_row(form.surname) }}
+	{{ form_row(form.gender) }}
+	{{ form_row(form.customFields) }}
+	<button type="button" class="add-row btn btn-primary mb-3" data-list-selector="#form_customFields">{% trans %}student.buttons.addField{% endtrans %}</button>
+	{{ form_row(form.submit) }}
+	{{ form_end(form) }}
+{% endblock %}

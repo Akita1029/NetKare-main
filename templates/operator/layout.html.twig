@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="fixed inset-y-0 left-0 bg-gray-800 w-72">
+		<div class="p-8">
+			<a href="{{ path('student_memoir') }}">
+				<img src="{{ asset('logo-3.svg') }}" alt="">
+			</a>
+		</div>
+		<nav>
+			<ul class="pl-8">
+				<li>
+					<a href="{{ path('student_memoir_self') }}" class="block hover:bg-gray-100 py-5 pl-8 border-l-8 border-gray-800 hover:border-yellow-500 text-white hover:text-gray-800 uppercase tracking-widest">Yıllık Yazım</a>
+					<a href="{{ path('student_memoir') }}" class="block hover:bg-gray-100 py-5 pl-8 border-l-8 border-gray-800 hover:border-yellow-500 text-white hover:text-gray-800 uppercase tracking-widest">Arkadaşlarına Yaz</a>
+					<a href="{{ path('student_memoir_self_read') }}" class="block hover:bg-gray-100 py-5 pl-8 border-l-8 border-gray-800 hover:border-yellow-500 text-white hover:text-gray-800 uppercase tracking-widest">Bana Yazılanlar</a>
+					<a href="{{ path('student_gallery_index') }}" class="block hover:bg-gray-100 py-5 pl-8 border-l-8 border-gray-800 hover:border-yellow-500 text-white hover:text-gray-800 uppercase tracking-widest">Galeri</a>
+					<a href="{{ path('student_personal_info_index') }}" class="block hover:bg-gray-100 py-5 pl-8 border-l-8 border-gray-800 hover:border-yellow-500 text-white hover:text-gray-800 uppercase tracking-widest">Kişisel Bilgilerim</a>
+					<a href="{{ path('student_password_index') }}" class="block hover:bg-gray-100 py-5 pl-8 border-l-8 border-gray-800 hover:border-yellow-500 text-white hover:text-gray-800 uppercase tracking-widest">Şifre Değiştir</a>
+					<a href="{{ path('student_memoir') }}" class="block hover:bg-gray-100 py-5 pl-8 border-l-8 border-gray-800 hover:border-yellow-500 text-white hover:text-gray-800 uppercase tracking-widest">Çıkış Yap</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<div class="pl-72">
+		<div class="px-6 py-10">
+			{% block content %}{% endblock %}
+		</div>
+	</div>
+{% endblock %}

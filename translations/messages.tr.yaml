@@ -1,0 +1,235 @@
+no_record: "kayıt bulunamadı"
+buttons:
+  new:
+    label: "Oluştur"
+  edit:
+    label: "Düzenle"
+  delete:
+    label: "Sil"
+    confirm: "Silmek istediğinize emin misiniz?"
+  save:
+    label: "Kaydet"
+  import:
+    label: "İçe Aktar"
+  reset_password:
+    label: "Şifre Oluştur"
+    confirm: "Şifre değiştirilecek. Onaylıyor musunuz?"
+  submit:
+    label: "Gönder"
+  add:
+    label: "Ekle"
+  photos:
+    label: "Fotoğraflar"
+  search:
+    label: "Ara"
+pagination:
+  prev: "Önceki"
+  next: "Sonraki"
+toolbar:
+  switch_school:
+    placeholders:
+      school: "Okul Seçimi"
+  search:
+    placeholders:
+      search: "Arama"
+  buttons:
+    switch:
+      label: "Değiştir"
+    search:
+      label: "Ara"
+    logout:
+      label: "Çıkış"
+album:
+  titles:
+    index: "Albümler"
+    new: "Albüm Oluştur"
+    edit: "Albüm Düzenle"
+  labels:
+    school: "Okul"
+    name: "Albüm Adı"
+  buttons:
+    photos: "Fotoğraflar"
+albumPhoto:
+  titles:
+    index: Albüm Fotoğrafları
+announcement:
+  titles:
+    index: "Duyurular"
+    new: "Duyuru Oluştur"
+    edit: "Duyuru Düzenle"
+  labels:
+    image: "Görsel"
+    title: "Başlık"
+    description: "Açıklama"
+category:
+  titles:
+    index: "Kategoriler"
+    new: "Kategori Oluştur"
+    edit: "Kategori Düzenle"
+  labels:
+    title: "Başlık"
+classroom:
+  titles:
+    index: "Sınıflar"
+    new: "Sınıf Oluştur"
+    edit: "Sınıf Düzenle"
+  labels:
+    school: "Okul"
+    name: "Sınıf Adı"
+    students: "Öğrenciler"
+dashboard:
+  titles:
+    index: "Pano"
+dealer:
+  titles:
+    index: "Bayiler"
+    new: "Bayi Oluştur"
+    edit: "Bayi Düzenle"
+  labels:
+    email: "Eposta"
+    plainPassword: "Şifre"
+    companyName: "Bayi Adı"
+    authorizedPersonName: "Yetkili Personel Adı"
+    address: "Adres"
+    phone: "Telefon"
+    phoneGsm: "Telefon (GSM)"
+    fax: "Faks"
+order:
+  titles:
+    index: "Siparişler"
+  statuses:
+    pending: "Bekliyor"
+    waiting_for_approval: "Onay Bekliyor"
+    waiting_for_payment: "Ödeme Bekliyor"
+    processed: "İşleme Alındı"
+    completed: "Tamamlandı"
+    canceled: "İptal Edildi"
+order_line:
+  labels:
+    product_options: "Seçenekler"
+    classrooms: "Sınıflar"
+    description: "Açıklama"
+    laboratory_referance: "Laboratuvar Referans Kodu"
+    product_template: "Şablon"
+    product_template_file: "Şablon Dosyası"
+    album: "Albüm"
+product:
+  titles:
+    index: "Ürünler"
+    new: "Ürün Oluştur"
+    edit: "Ürün Düzenle"
+  labels:
+    title: "Başlık"
+    description: "Açıklama"
+    image: "Görsel"
+    price: "Fiyat"
+    category: "Kategori"
+    canSelectMultipleOption: "Birden fazla seçenek seçilebilir"
+    canFillLaboratoryReference: "Laboratuvar referans kodu verilebilir"
+    canSelectTemplate: "Şablon seçilebilir"
+    options: 'Seçenekler'
+    templates: 'Şablonlar'
+    knifeTemplate: 'Bıçak Şablonu'
+    fields: 'Alanlar'
+school:
+  titles:
+    index: "Okullar"
+    new: "Okul Oluştur"
+    edit: "Okul Düzenle"
+  labels:
+    name: "İsim"
+    owner: "Bayi"
+    logo: "Logo"
+    email: "Eposta"
+    address: "Adres"
+    phone: "Telefon"
+    phoneGsm: "Telefon (GSM)"
+    fax: "Faks"
+    note: "Not"
+    classrooms: "Sınıflar"
+school_import:
+  title: "İçe Aktar"
+  labels:
+    excel: "Excel"
+    archive: "Arşiv"
+student:
+  titles:
+    index: "Öğrenciler"
+    new: "Öğrenci Oluştur"
+    edit: "Öğrenci Düzenle"
+  labels:
+    school: "Okul"
+    classroom: "Sınıf"
+    schoolNumber: "Okul No"
+    name: "İsim"
+    surname: "Soyisim"
+    gender: "Cinsiyet"
+    customFields: "Özel Alanlar"
+  buttons:
+    addField: "Alan Ekle"
+yearbook:
+  titles:
+    index: "Yıllıklar"
+    new: "Yıllık Oluştur"
+    edit: "Yıllık Düzenle"
+  labels:
+    dealer: "Bayi"
+    school: "Okul"
+    classrooms: "Yıllığa Katılacak Sınıflar"
+    startsAt: "Başlangıç Tarihi"
+    endsAt: "Bitiş Tarihi"
+    memoir: "Öğrenciler kimlere anı yazısı yazabilir?"
+    imageUpload: "Öğrenciler resim yükleyebilir"
+    imageUploadLimit: "Resim Yükleme Limiti"
+    youtube: "Öğrenciler youtube videosu ekleyebilir."
+    qrPrefix: "QR Kodu Öneki"
+    profileAlbum: "Profil Fotoğrafı Olarak Kullanılacak Albüm"
+    galleryAlbums: "Galeri Fotoğrafı Olarak Kullanılacak Albümler"
+  memoir:
+    statuses:
+      nobody: "Kimseye yazamaz."
+      classroom: "Kendi sınıfından olanlara yazabilir."
+      everybody: "Tüm okula yazabilir."
+memoir:
+  labels:
+    sender: "Gönderici"
+    receiver: "Alıcı"
+student_personal_info:
+  labels:
+    email: "Eposta"
+    phone: "Telefon"
+    horoscope: "Burç"
+    birthdate: "Doğum Tarihi"
+    facebook: "Facebook Profili"
+    youtube: "Youtube Sayfası"
+    instagram: "Instagram Profili"
+    web: "Web Sayfası"
+password:
+  labels:
+    password: "Şifre"
+    password_again: "Şifre Tekrar"
+operator:
+  labels:
+    classrooms: "Sınıflar"
+download:
+  titles:
+    index: "İndirmeler"
+  labels:
+    school: "Okul"
+    type: "Tür"
+  types:
+    e_shool_album: "E-Okul Albümü Fotoğrafları"
+    e_school_album_with_student_name_surname: "E-Okul Albümü Fotoğrafları (Öğrenci İsim Soyisimleri İle)"
+    all_albums: "Tüm Albüm Fotoğrafları"
+    biometric_2: "2li Biyometrik Dizilimi"
+    biometric_4: "4lü Biyometrik Dizilimi"
+    headshot_2: "2li Vesikalık Dizilimi"
+    headshot_4: "4lü Vesikalık Dizilimi"
+    headshot_8: "8li Vesikalık Dizilimi"
+    executive: "İdareci Albümü"
+    excel: "Excel Verileri"
+    transcript: "Not Çizelgesi"
+    yearbook: "Mezuniyet Albümü"
+  statuses:
+    pending: "Bekliyor"
+    done: "Yapıldı"

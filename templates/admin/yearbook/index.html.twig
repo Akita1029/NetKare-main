@@ -1,0 +1,51 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% set title = 'yearbook.titles.index'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<div class="flex justify-between mb-5">
+		<div>
+			<h1>{{ title }}</h1>
+		</div>
+		<div>
+			<a href="{{ path('app_admin_yearbook_new') }}" class="btn btn-primary">{% trans %}buttons.new.label{% endtrans %}</a>
+		</div>
+	</div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>{% trans %}yearbook.labels.dealer{% endtrans %}</th>
+				<th>{% trans %}yearbook.labels.school{% endtrans %}</th>
+				<th>{% trans %}yearbook.labels.startsAt{% endtrans %}</th>
+				<th>{% trans %}yearbook.labels.endsAt{% endtrans %}</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for yearbook in yearbooks %}
+				<tr>
+					<td>{{ yearbook.school.owner.companyName }}</td>
+					<td>{{ yearbook.school.name }}</td>
+					<td>{{ yearbook.startsAt ? yearbook.startsAt|date('d-m-Y') : '' }}</td>
+					<td>{{ yearbook.endsAt ? yearbook.endsAt|date('d-m-Y') : '' }}</td>
+					<td class="text-right">
+						<a href="{{ path('admin_operator_index', {'yearbookId': yearbook.id}) }}" class="btn btn-default">Operatörler</a>
+						<a href="{{ path('app_admin_yearbook_edit', {'id': yearbook.id}) }}" class="btn btn-default">{% trans %}buttons.edit.label{% endtrans %}</a>
+						{{ include('admin/yearbook/_delete_form.html.twig') }}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="9">{% trans %}no_record{% endtrans %}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{{ render(controller('App\\Controller\\PaginatorController::index', {'paginator': yearbooks, 'paginatorPerPage': paginatorPerPage})) }}
+{% endblock %}

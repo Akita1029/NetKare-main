@@ -1,0 +1,42 @@
+{% extends 'dealer/layout.html.twig' %}
+
+{% set title = 'order.titles.index'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">{{ title }}</h1>
+
+	{% if search.school %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Durum</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for order in orders %}
+					<tr>
+						<td>{{ order.id }}</td>
+						<td>{{ ('order.statuses.' ~ order.status)|trans }}</td>
+						<td class="text-right">
+							<a href="{{ path('dealer_order_show', {'id': order.id}) }}" class="btn btn-primary">Görüntüle</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="4">{% trans %}no_record{% endtrans %}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		{{ render(controller('App\\Controller\\PaginatorController::index', {'paginator': orders, 'paginatorPerPage': paginatorPerPage})) }}
+	{% else %}
+		{{ include('dealer/_alert_school.html.twig') }}
+	{% endif %}
+{% endblock %}

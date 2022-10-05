@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.form-label {
+    @apply block;
+}
+
+.form-widget {
+    @apply block border border-gray-300 rounded px-3 py-2 appearance-none file:hidden w-full;
+}
+
+select.form-widget {
+    @apply pr-10;
+}
+
+.btn {
+    @apply rounded px-3 py-2 inline-block border;
+}
+
+.btn-primary {
+    @apply bg-yellow-600 hover:bg-yellow-700 text-white border-yellow-600;
+}
+
+.btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white border-red-600;
+}
+
+.btn-light {
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-900 border-gray-200;
+}
+
+.table {
+    @apply w-full text-left;
+}
+
+.table th,
+.table td {
+    @apply px-2 py-3 border-y border-gray-200;
+}
+
+.table tbody tr:nth-of-type(odd) {
+    @apply bg-gray-100;
+}
+
+h1 {
+    @apply font-extralight text-3xl;
+}
+
+.alert {
+    @apply p-3 border rounded;
+}
+
+.alert-danger {
+    @apply bg-red-100 border-red-200 text-red-800;
+}
+
+.alert-success {
+    @apply bg-green-100 border-green-200 text-green-800;
+}
+
+.alert-info {
+    @apply bg-cyan-100 border-cyan-200 text-cyan-800;
+}
+
+.alert-warning {
+    @apply bg-yellow-100 border-yellow-200 text-yellow-800;
+}
+
+.modal {
+    @apply fixed inset-0 bg-black/50;
+}
+
+.modal-dialog {
+    @apply mx-auto my-7 max-w-lg bg-white rounded-lg;
+}
+
+.modal-lg .modal-dialog {
+    @apply max-w-3xl;
+}
+
+.modal-header {
+    @apply flex items-center justify-between border-b px-6 py-4;
+}
+
+.modal-header button span {
+    @apply block;
+}
+
+.modal-title {
+    @apply text-xl;
+}
+
+.modal-body {
+    @apply px-6 py-4;
+}
+
+.accordion-header {
+    @apply px-5 py-3 bg-yellow-600 text-white cursor-pointer text-lg;
+}
+
+.accordion-collapse {
+    @apply max-h-0 overflow-hidden transition-all duration-500;
+}
+
+.accordion-collapse.show {
+    @apply max-h-96 overflow-auto;
+}

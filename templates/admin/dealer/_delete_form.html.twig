@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('admin_dealer_delete', {'id': dealer.id}) }}" onsubmit="return confirm('{% trans %}buttons.delete.confirm{% endtrans %}');" class="inline-block">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ dealer.id) }}">
+    <button class="btn btn-danger">{% trans %}buttons.delete.label{% endtrans %}</button>
+</form>

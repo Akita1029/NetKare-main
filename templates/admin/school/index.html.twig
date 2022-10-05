@@ -1,0 +1,48 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% set title = 'Okullar' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<div class="flex justify-between mb-5">
+		<div>
+			<h1>{{ title }}</h1>
+		</div>
+		<div>
+			<a href="{{ path('admin_school_new') }}" class="btn btn-primary">{% trans %}buttons.new.label{% endtrans %}</a>
+		</div>
+	</div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>{% trans %}school.labels.logo{% endtrans %}</th>
+				<th>{% trans %}school.labels.name{% endtrans %}</th>
+				<th>{% trans %}school.labels.phone{% endtrans %}</th>
+				<th>{% trans %}school.labels.owner{% endtrans %}</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for school in schools %}
+				<tr>
+					<td><img src="{{ asset('uploads/schools/' ~ school.logoFilename) }}" alt="" class="h-16"></td>
+					<td>{{ school.name }}</td>
+					<td>{{ school.phone }}</td>
+					<td>{{ school.owner.companyName }}</td>
+					<td class="text-right">
+						<a href="{{ path('admin_school_edit', {'id': school.id}) }}" class="btn btn-light">{% trans %}buttons.edit.label{% endtrans %}</a>
+						{{ include('admin/school/_delete_form.html.twig') }}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">{% trans %}no_record{% endtrans %}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% set title = 'Operatörler' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<div class="flex justify-between mb-5">
+		<div>
+			<h1>{{ title }}</h1>
+		</div>
+		<div>
+			<a href="{{ path('admin_operator_new', {'yearbookId': yearbook.id}) }}" class="btn btn-primary">{% trans %}buttons.new.label{% endtrans %}</a>
+		</div>
+	</div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Kimlik</th>
+				<th>Sınıflar</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for operator in operators %}
+				<tr>
+					<td>{{ operator.id }}</td>
+					<td>{{ operator.classrooms|join(', ') }}</td>
+					<td class="text-right">
+						<a href="{{ path('admin_operator_edit', {'yearbookId': yearbook.id, 'id': operator.id}) }}" class="btn btn-light">{% trans %}buttons.edit.label{% endtrans %}</a>
+						<form method="post" action="{{ path('admin_operator_password', {'yearbookId': yearbook.id, 'id': operator.id}) }}" onsubmit="return confirm('{% trans %}buttons.delete.confirm{% endtrans %}');" class="inline-block">
+							<input type="hidden" name="_token" value="{{ csrf_token('reset_password' ~ operator.id) }}">
+							<button class="btn btn-danger">{% trans %}buttons.reset_password.label{% endtrans %}</button>
+						</form>
+						<form method="post" action="{{ path('admin_operator_delete', {'yearbookId': yearbook.id, 'id': operator.id}) }}" onsubmit="return confirm('{% trans %}buttons.delete.confirm{% endtrans %}');" class="inline-block">
+							<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ operator.id) }}">
+							<button class="btn btn-danger">{% trans %}buttons.delete.label{% endtrans %}</button>
+						</form>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">{% trans %}no_record{% endtrans %}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

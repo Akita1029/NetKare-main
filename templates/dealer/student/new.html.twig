@@ -1,0 +1,17 @@
+{% extends 'dealer/layout.html.twig' %}
+
+{% set title = 'student.titles.new'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">{{ title }}</h1>
+
+	{% if form is defined %}
+		{{ include('dealer/student/_form.html.twig') }}
+	{% else %}
+		{{ include('dealer/_alert_school.html.twig') }}
+	{% endif %}
+{% endblock %}

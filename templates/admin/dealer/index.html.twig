@@ -1,0 +1,51 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% set title = 'dealer.titles.index'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<div class="flex justify-between mb-5">
+		<div>
+			<h1>{{ title }}</h1>
+		</div>
+		<div>
+			<a href="{{ path('admin_permission_index') }}" class="btn btn-light">Genel Bayi Yetkileri</a>
+			<a href="{{ path('admin_dealer_new') }}" class="btn btn-primary">{% trans %}buttons.new.label{% endtrans %}</a>
+		</div>
+	</div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>{% trans %}dealer.labels.companyName{% endtrans %}</th>
+				<th>{% trans %}dealer.labels.authorizedPersonName{% endtrans %}</th>
+				<th>{% trans %}dealer.labels.email{% endtrans %}</th>
+				<th>{% trans %}dealer.labels.phone{% endtrans %}</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for dealer in dealers %}
+				<tr>
+					<td>{{ dealer.companyName }}</td>
+					<td>{{ dealer.authorizedPersonName }}</td>
+					<td>{{ dealer.email }}</td>
+					<td>{{ dealer.phone }}</td>
+					<td class="text-right">
+						
+						<a href="{{ path('admin_permission_dealer', {'id': dealer.id}) }}" class="btn btn-light">Bayi Yetkileri</a>
+						<a href="{{ path('admin_dealer_edit', {'id': dealer.id}) }}" class="btn btn-light">{% trans %}buttons.edit.label{% endtrans %}</a>
+						{{ include('admin/dealer/_delete_form.html.twig') }}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="13">{% trans %}no_record{% endtrans %}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

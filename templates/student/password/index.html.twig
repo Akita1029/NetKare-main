@@ -1,0 +1,24 @@
+{% extends 'student/layout.html.twig' %}
+
+{% set title = 'Şifre Değiştir' %}
+
+{% block title %}
+	{{title}}
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">{{title}}</h1>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} mb-5">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+	{{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">{% trans %}buttons.save.label{% endtrans %}</button>
+    {{ form_end(form) }}
+{% endblock %}

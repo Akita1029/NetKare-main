@@ -1,0 +1,11 @@
+twig:
+    default_path: "%kernel.project_dir%/templates"
+    globals:
+        cdn_path: "%app.cdn.path%"
+        schools_directory: "%schools_directory%"
+        search: '@App\Service\Search'
+    form_themes: ["form/my_theme.html.twig"]
+
+when@test:
+    twig:
+        strict_variables: true

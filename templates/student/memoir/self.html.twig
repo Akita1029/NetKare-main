@@ -1,0 +1,22 @@
+{% extends 'student/layout.html.twig' %}
+
+{% block title %}
+	Anı Yazılarım
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">Yıllık Yazım</h1>
+
+    {% for label, messages in app.flashes %}
+		{% for message in messages %}
+			<div class="alert alert-{{ label }} mb-5">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endfor %}
+
+	{{ form_start(form) }}
+        {{ form_widget(form.text, {'attr': {'class': 'form-widget mb-3', 'rows': 10}}) }}
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+	{{ form_end(form) }}
+{% endblock %}

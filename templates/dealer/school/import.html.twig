@@ -1,0 +1,26 @@
+{% extends 'dealer/layout.html.twig' %}
+
+{% set title = 'school_import.title'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">{{ title }}</h1>
+
+	<div class="flex gap-4">
+		<div class="flex-1">
+			{{ form_start(form1) }}
+				{{ form_widget(form1) }}
+				<button type="submit" class="btn btn-primary">{% trans %}buttons.submit.label{% endtrans %}</button>
+			{{ form_end(form1) }}
+		</div>
+		<div class="flex-1">
+			{{ form_start(form2) }}
+				{{ form_widget(form2) }}
+				<button type="submit" class="btn btn-primary">{% trans %}buttons.submit.label{% endtrans %}</button>
+			{{ form_end(form2) }}
+		</div>
+	</div>
+{% endblock %}

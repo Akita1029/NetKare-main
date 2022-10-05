@@ -1,0 +1,13 @@
+{% extends 'school/layout.html.twig' %}
+
+{% set title = 'album.titles.new'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mb-5">{{ title }}</h1>
+
+    {{ include('school/album/_form.html.twig') }}
+{% endblock %}

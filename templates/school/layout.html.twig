@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="fixed inset-y-0 left-0 bg-gray-800 w-72">
+		<div class="p-8">
+			<a href="{{ path('school_dashboard') }}">
+				<img src="{{ asset('logo-3.svg') }}" alt="">
+			</a>
+		</div>
+		<nav>
+			<ul class="pl-8">
+				<li>
+					<a href="{{ path('school_dashboard') }}" class="block hover:bg-gray-100 py-5 pl-8 border-l-8 border-gray-800 hover:border-yellow-500 text-white hover:text-gray-800 uppercase tracking-widest">Anasayfa</a>
+				</li>
+				<li>
+					<a href="{{ path('school_classroom_index') }}" class="block hover:bg-gray-100 py-5 pl-8 border-l-8 border-gray-800 hover:border-yellow-500 text-white hover:text-gray-800 uppercase tracking-widest">Sınıflar</a>
+				</li>
+				<li>
+					<a href="{{ path('school_student_index') }}" class="block hover:bg-gray-100 py-5 pl-8 border-l-8 border-gray-800 hover:border-yellow-500 text-white hover:text-gray-800 uppercase tracking-widest">Öğrenciler</a>
+				</li>
+				<li>
+					<a href="{{ path('school_album_index') }}" class="block hover:bg-gray-100 py-5 pl-8 border-l-8 border-gray-800 hover:border-yellow-500 text-white hover:text-gray-800 uppercase tracking-widest">Albümler</a>
+				</li>
+				<li>
+					<a href="{{ path('school_order_index') }}" class="block hover:bg-gray-100 py-5 pl-8 border-l-8 border-gray-800 hover:border-yellow-500 text-white hover:text-gray-800 uppercase tracking-widest">Siparişler</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<div class="pl-72">
+		<div class="px-6 py-10">
+			{% block content %}{% endblock %}
+		</div>
+	</div>
+{% endblock %}

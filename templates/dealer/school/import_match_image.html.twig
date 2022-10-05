@@ -1,0 +1,25 @@
+{% extends 'dealer/layout.html.twig' %}
+
+{% block title %}
+	İçe Aktar
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">İçe Aktar</h1>
+
+	{{ form_start(form) }}
+		{{ form_row(form.albumName) }}
+		<div class="mb-5">Eşleştirmeler</div>
+		{% for matchField in form.matches|sort((a, b) => a.vars.value.classroom.name <=> b.vars.value.classroom.name) %}
+			<div class="flex mt-2">
+				<div class="flex-1">
+					{{ matchField.classroom.vars.value.name }}
+				</div>
+				<div class="flex-1">
+					{{ form_widget(matchField.folder, {'widget_class': 'form-widget'}) }}
+				</div>
+			</div>
+		{% endfor %}
+		<button class="btn btn-primary">Gönder</button>
+	{{ form_end(form) }}
+{% endblock %}

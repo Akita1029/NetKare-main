@@ -1,0 +1,71 @@
+{% extends 'school/layout.html.twig' %}
+
+{% set title = 'Ürün Dahil Etme Formu' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">{{ title }}</h1>
+
+	{% for label, messages in app.flashes %}
+		{% for message in messages %}
+			<div class="alert alert-{{ label }} mb-5">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endfor %}
+
+	{{ form_start(filter, {'attr': {'class': 'inline-flex gap-3 mb-5'}}) }}
+		{{ form_widget(filter.classroom, {'attr': {'class': 'form-widget'}}) }}
+		<button type="submit" class="btn btn-primary">{% trans %}buttons.search.label{% endtrans %}</button>
+	{{ form_end(filter) }}
+
+	{{ form_start(form) }}
+	<table class="table mb-5">
+		<thead>
+			<tr>
+				<th>
+					Öğrenci No
+				</th>
+				<th>
+					Adı Soyadı
+				</th>
+                <th>
+                    Sınıf
+                </th>
+				{% for orderLine in orderLines %}
+					<th>
+						{{ orderLine.product.title }}
+					</th>
+				{% endfor %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for student in students %}
+				<tr>
+					<td>
+						{{ student.schoolNumber }}
+					</td>
+					<td>
+						{{ student.name }}
+                        {{ student.surname }}
+					</td>
+                    <td>
+                        {{ student.classroom.name }}
+                    </td>
+					{% for item in form[student.id] %}
+						<td>
+							{{ form_widget(item, {'attr': {'class': ''}}) }}
+						</td>
+					{% endfor %}
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<button type="submit" class="btn btn-primary">{% trans %}buttons.save.label{% endtrans %}</button>
+	{{ form_end(form) }}
+
+	{{ render(controller('App\\Controller\\PaginatorController::index', {'paginator': students, 'paginatorPerPage': paginatorPerPage})) }}
+{% endblock %}

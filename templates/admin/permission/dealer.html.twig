@@ -1,0 +1,32 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% set title = 'Bayi Yetkileri - ' ~ dealer.companyName %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<div class="flex justify-between mb-5">
+		<div>
+			<h1>{{ title }}</h1>
+		</div>
+	</div>
+
+	{% for label, messages in app.flashes %}
+		{% for message in messages %}
+			<div class="alert alert-{{ label }} mb-3">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endfor %}
+
+	{{ form_start(form) }}
+	<div class="flex flex-col gap-4 mb-4">
+		{% for child in form %}
+			{{ form_row(child, {'label': 'download.types.' ~ child.vars.name, 'row_attr': {'class': 'flex justify-between items-center'}}) }}
+		{% endfor %}
+	</div>
+	<button type="submit" class="btn btn-primary">{% trans %}buttons.save.label{% endtrans %}</button>
+	{{ form_end(form) }}
+{% endblock %}

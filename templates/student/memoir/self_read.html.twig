@@ -1,0 +1,18 @@
+{% extends 'student/layout.html.twig' %}
+
+{% block title %}
+	Anı Yazılarım
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">Bana Yazılanlar</h1>
+
+	{% for memoir in memoirs %}
+        <div class="flex">
+            <h1>{{ memoir.sender.name }}</h1>
+            <p>{{ memoir.text }}</p>
+        </div>
+    {% else %}
+        <div class="alert alert-info">Henüz, size yazılmış bir anı yazısı bulunmuyor.</div>
+    {% endfor %}
+{% endblock %}

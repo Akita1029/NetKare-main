@@ -1,0 +1,85 @@
+{% extends 'dealer/layout.html.twig' %}
+
+{% set title = 'student.titles.index'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<div class="flex justify-between mb-5">
+		<div>
+			<h1>{{ title }}</h1>
+		</div>
+		<div>
+			<a href="{{ path('dealer_student_new') }}" class="btn btn-primary">{% trans %}buttons.new.label{% endtrans %}</a>
+		</div>
+	</div>
+
+	{% if search.school %}
+		{{ form_start(filter, {'attr': {'class': 'mb-4', 'id': 'filter_student'}}) }}
+		<div class="inline-flex items-end gap-2">
+			<div class="w-48">
+				{{ form_widget(filter.classroom, {'attr': {'class': 'form-widget'}}) }}
+			</div>
+			<div>
+				<button type="submit" class="btn btn-primary">Ara</button>
+			</div>
+		</div>
+		{{ form_end(filter) }}
+
+		<table class="table mb-4">
+			<thead>
+				<tr>
+					<th></th>
+					<th>
+						{% trans %}student.labels.name{% endtrans %}
+						{% trans %}student.labels.surname{% endtrans %}
+					</th>
+					<th>
+						{% trans %}student.labels.schoolNumber{% endtrans %}
+					</th>
+					<th>
+						{% trans %}student.labels.classroom{% endtrans %}
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for student in students %}
+					{% set classroom = student.classroom %}
+					{% set school = classroom.school %}
+					<tr>
+						<td>
+							{% if student.photos.0.image.asset.name is defined %}
+								<img src="{{ cdn_path ~ '/' ~ student.photos.0.image.asset.name }}" class="w-24">
+							{% endif %}
+						</td>
+						<td class="capitalize">
+							{{ student.name }}
+							{{ student.surname }}
+						</td>
+						<td>
+							{{ student.schoolNumber }}
+						</td>
+						<td>
+							{{ classroom.name }}
+						</td>
+						<td class="text-right">
+							<a href="{{ path('dealer_student_edit', {'id': student.id}) }}" class="btn btn-light">{% trans %}buttons.edit.label{% endtrans %}</a>
+							{{ include('dealer/student/_delete_form.html.twig') }}
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="6">{% trans %}no_record{% endtrans %}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		{{ render(controller('App\\Controller\\PaginatorController::index', {'paginator': students, 'paginatorPerPage': paginatorPerPage})) }}
+	{% else %}
+		{{ include('dealer/_alert_school.html.twig') }}
+	{% endif %}
+{% endblock %}

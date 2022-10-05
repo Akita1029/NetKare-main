@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Classroom{% endblock %}
+
+{% block body %}
+    <h1>Classroom</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ classroom.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('dealer_classroom_index') }}">back to list</a>
+
+    <a href="{{ path('dealer_classroom_edit', {'id': classroom.id}) }}">edit</a>
+
+    {{ include('dealer/classroom/_delete_form.html.twig') }}
+{% endblock %}

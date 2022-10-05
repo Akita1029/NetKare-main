@@ -1,0 +1,37 @@
+services:
+  mysql:
+    restart: unless-stopped
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+  php:
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: ./docker/php/Dockerfile
+    depends_on:
+      - mysql
+      - rabbitmq
+    volumes:
+      - ./:/var/www/project
+    environment:
+      XDEBUG_CONFIG: remote_enable=true remote_host=host.docker.internal
+  nginx:
+    restart: unless-stopped
+    image: nginx:1
+    depends_on:
+      - php
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www/project
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+  rabbitmq:
+    restart: unless-stopped
+    image: 'rabbitmq:3-management'
+    ports:
+      - '5672:5672'
+      - '15672:15672'

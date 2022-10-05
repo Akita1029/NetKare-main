@@ -1,0 +1,14 @@
+{% extends 'dealer/layout.html.twig' %}
+
+{% block title %}
+	New Order
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">Ürün Ekle: {{ product.title }}</h1>
+
+	{{ form_start(form) }}
+		{{ form_widget(form) }}
+		<button type="submit" class="btn btn-primary">{% trans %}buttons.add.label{% endtrans %}</button>
+	{{ form_end(form) }}
+{% endblock %}

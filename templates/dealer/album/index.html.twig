@@ -1,0 +1,47 @@
+{% extends 'dealer/layout.html.twig' %}
+
+{% set title = 'album.titles.index'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<div class="flex justify-between mb-5">
+		<div>
+			<h1>{{ title }}</h1>
+		</div>
+		<div>
+			<a href="{{ path('app_dealer_album_new') }}" class="btn btn-primary">{% trans %}buttons.new.label{% endtrans %}</a>
+		</div>
+	</div>
+
+	{% if search.school %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>{% trans %}album.labels.name{% endtrans %}</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for album in albums %}
+					<tr>
+						<td>{{ album.name }}</td>
+						<td class="text-right">
+							<a href="{{ path('app_dealer_album_photo', {'id': album.id}) }}" class="btn btn-light">{% trans %}album.buttons.photos{% endtrans %}</a>
+							<a href="{{ path('app_dealer_album_edit', {'id': album.id}) }}" class="btn btn-light">{% trans %}buttons.edit.label{% endtrans %}</a>
+							{{ include('dealer/album/_delete_form.html.twig') }}
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="3">{% trans %}no_record{% endtrans %}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		{{ include('dealer/_alert_school.html.twig') }}
+	{% endif %}
+{% endblock %}

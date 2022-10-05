@@ -1,0 +1,64 @@
+{% extends 'student/layout.html.twig' %}
+
+{% block title %}
+	Anı Yazılarım
+{% endblock %}
+
+{% block content %}
+	<div class="flex justify-between">
+		<h1 class="mb-5">Anı Yazılarım</h1>
+		<div>
+			<a href="{{ path('student_memoir_write', {'receiverId': app.user.id}) }}" class="btn btn-primary">Kendim İçin</a>
+		</div>
+	</div>
+
+	{% if form.classroom is defined %}
+		{{ form_start(form, {'attr': {'class': 'inline-flex gap-3 mb-3'}}) }}
+			{{ form_widget(form.classroom, {'attr': {'class': 'form-widget'}}) }}
+			<button type="submit" class="btn btn-primary">Getir</button>
+		{{ form_end(form) }}	
+	{% endif %}
+
+	{% for label, messages in app.flashes %}
+		{% for message in messages %}
+			<div class="alert alert-{{ label }} mb-5">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endfor %}
+
+	<table class="table mb-4">
+		<thead>
+			<tr>
+				<th>İsim</th>
+				<th>Sınıf</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for student in students %}
+				<tr>
+					<td>
+						{{ student.name }}
+						{{ student.surname }}
+					</td>
+					<td>
+						{{ student.classroom.name }}
+					</td>
+					<td class="text-right">
+						{% if student.memoriesAsReceiver|length > 0 %}
+							<span class="text-green-500">Anı yazısı yazılmış.</span>
+						{% endif %}
+						<a href="{{ path('student_memoir_write', {'receiverId': student.id}) }}" class="btn btn-primary">Yaz</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{{ render(controller('App\\Controller\\PaginatorController::index', {'paginator': students, 'paginatorPerPage': paginatorPerPage})) }}
+{% endblock %}

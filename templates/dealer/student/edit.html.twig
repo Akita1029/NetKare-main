@@ -1,0 +1,27 @@
+{% extends 'dealer/layout.html.twig' %}
+
+{% set title = 'student.titles.new'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5">{{ title }}</h1>
+
+	{{ form_start(form) }}
+		{{ form_widget(form.student) }}
+		{% set i = 0 %}
+		{% for photo in form.photos %}
+			<div class="flex gap-3 mb-3">
+				<img src="{{ cdn_path ~ '/' ~ form.vars.value.photos[i].image.asset.name }}" class="w-48">
+				<div>
+					{{ form.vars.value.photos[i].album.name }}
+					{{ form_widget(photo.imageFile) }}
+				</div>
+			</div>
+			{% set i = i + 1 %}
+		{% endfor %}
+		<button class="btn btn-primary">{% trans %}buttons.save.label{% endtrans %}</button>
+	{{ form_end(form) }}
+{% endblock %}

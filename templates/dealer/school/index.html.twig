@@ -1,0 +1,65 @@
+{% extends 'dealer/layout.html.twig' %}
+
+{% set title = 'school.titles.index'|trans %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	<div class="flex justify-between mb-5">
+		<div>
+			<h1>{{ title }}</h1>
+		</div>
+		<div>
+			<a href="{{ path('dealer_school_new') }}" class="btn btn-primary">{% trans %}buttons.new.label{% endtrans %}</a>
+		</div>
+	</div>
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success mb-3">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+	<table class="table mb-4">
+		<thead>
+			<tr>
+				<th></th>
+				<th>{% trans %}school.labels.name{% endtrans %}</th>
+				<th>{% trans %}school.labels.classrooms{% endtrans %}</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for school in schools %}
+				<tr>
+					<td>
+						<img src="{{ asset('uploads/schools/' ~ school.logoFilename) }}" alt="" class="h-16">
+					</td>
+					<td>
+						{{ school.name }}
+					</td>
+					<td>
+						<a href="{{ path('dealer_classroom_index', {'form': {'school': school.id}}) }}">{{ school.classrooms|length }}</a>
+					</td>
+					<td class="text-right">
+						<form method="post" action="{{ path('dealer_school_password', {'id': school.id}) }}" onsubmit="return confirm('{% trans %}buttons.reset_password.confirm{% endtrans %}');" class="inline-block">
+							<input type="hidden" name="_token" value="{{ csrf_token('password' ~ school.id) }}">
+							<button class="btn btn-danger">{% trans %}buttons.reset_password.label{% endtrans %}</button>
+						</form>
+						<a href="{{ path('dealer_school_import', {'id': school.id}) }}" class="btn btn-light">{% trans %}buttons.import.label{% endtrans %}</a>
+						<a href="{{ path('dealer_school_edit', {'id': school.id}) }}" class="btn btn-light">{% trans %}buttons.edit.label{% endtrans %}</a>
+						{{ include('dealer/school/_delete_form.html.twig') }}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">{% trans %}no_record{% endtrans %}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{{ render(controller('App\\Controller\\PaginatorController::index', {'paginator': schools, 'paginatorPerPage': paginatorPerPage})) }}
+{% endblock %}

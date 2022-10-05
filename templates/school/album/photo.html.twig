@@ -1,0 +1,70 @@
+{% extends 'school/layout.html.twig' %}
+
+{% block title %}Album Photo
+{% endblock %}
+
+{% block content %}
+	<div class="flex justify-between mb-5">
+		<div>
+			<h1>Album Photos</h1>
+		</div>
+		<div>
+			<a href="{{ path('school_album_photo_came_update', {'id': album.id}) }}" class="btn btn-primary">Gelmeyen Öğrencileri Yükle</a>
+		</div>
+	</div>
+
+	{{ form_start(filter) }}
+	<div class="mb-5 flex justify-between items-end">
+		<div>
+			<div class="flex gap-4 items-end">
+				{{ form_row(filter.classroom, {'row_attr': {'class': 'mb-0'}}) }}
+				{{ form_row(filter.schoolNumber, {'row_attr': {'class': 'mb-0'}}) }}
+				{{ form_row(filter.name, {'row_attr': {'class': 'mb-0'}}) }}
+				{{ form_row(filter.status, {'row_attr': {'class': 'mb-0'}}) }}
+				<div>
+					<button type="submit" class="btn btn-primary">Filter</button>
+					<a href="{{ path('school_album_photo', {'id': album.id}) }}" class="btn btn-default">Reset</a>
+				</div>
+			</div>
+		</div>
+		<div>
+			{{ form_widget(filter.sort, {'attr': {'class': 'btn btn.default'}}) }}
+			<button type="button" class="btn btn-primary" id="selector">Seç</button>
+			<div class="hidden items-center gap-1 ml-3" id="select-action">
+				<div id="counter">Seçilenleri (0):</div>
+				<div>
+					<button class="btn btn-primary" id="make-came">Geldi Yap</button>
+					<button class="btn btn-primary" id="make-did-not-come">Gelmedi Yap</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{ form_end(filter) }}
+
+	<div class="alert alert-danger mb-5">Gelmeyen öğrenciler kırmızı olarak işaretlenmiştir.</div>
+	<div class="alert alert-success mb-5 hidden" id="success-result"></div>
+
+
+	<div class="grid grid-cols-4 gap-6" data-post-url="{{ path('school_album_photo_came', {'id': album.id}) }}" id="photos">
+		{% for key, form in forms %}
+			{% set photo = photos[key] %}
+			<div class="flex flex-col items-center justify-between gap-6 border p-3 photo rounded {{ photo.came == false ? 'border-red-200 bg-red-100' }} " data-id="{{ photo.id }}" data-came="{{ photo.came }}">
+				<div>
+					<img src="{{cdn_path ~ '/' ~ photo.image.asset.name}}" class="w-48">
+				</div>
+				{{ form_start(form) }}
+				<div class="flex items-center gap-3">
+					<div>
+						{{ form_widget(form.student, {'attr': {'class': 'form-widget'}}) }}
+					</div>
+					<div>
+						<button type="submit" class="btn btn-primary">Update</button>
+					</div>
+				</div>
+				{{ form_end(form) }}
+			</div>
+		{% else %}
+			Fotoğraf yok
+		{% endfor %}
+	</div>
+{% endblock %}

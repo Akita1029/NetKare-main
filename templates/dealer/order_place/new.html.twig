@@ -1,0 +1,136 @@
+{% extends 'dealer/layout.html.twig' %}
+
+{% block title %}
+	New Order
+{% endblock %}
+
+{% block content %}
+	<h1 class="flex items-center justify-between mb-5">
+		Sipariş Ver
+	</h1>
+
+	<div class="flex items-center justify-between mb-4">
+		<div>
+			<button class="btn btn-primary modal-open" data-target-modal="#product-modal">Ürün Ekle</button>
+		</div>
+		{{ form_start(form) }}
+		<button type="submit" class="btn btn-primary">Sipariş Ver</button>
+		{{ form_end(form) }}
+	</div>
+
+	{% for label, messages in app.flashes %}
+		{% for message in messages %}
+			<div class="alert alert-{{ label }} mb-3">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endfor %}
+
+	{% if order and order.orderLines and order.orderLines|length > 0 %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="w-48"></th>
+					<th>Ürün Adı</th>
+					<th>Ürün Özellikleri</th>
+					<th>Albüm Adı</th>
+					<th>Sınıflar</th>
+					<th>Laboratuvar Referans Kodu</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for orderLine in order.orderLines %}
+					<tr>
+						<td>
+							<img src="{{ asset('uploads/products/' ~ orderLine.product.imageFilename) }}" alt="{{ orderLine.product.title }}" class="w-full">
+						</td>
+						<td>
+							{{ orderLine.product.title }}
+						</td>
+						<td>
+							{% if orderLine.productOptions|length > 0 %}
+								<ul>
+									{% for productOption in orderLine.productOptions %}
+										<li>{{ productOption.title }}</li>
+									{% endfor %}
+								</ul>
+							{% endif %}
+						</td>
+						<td>
+							{{ orderLine.album.name }}
+						</td>
+						<td>
+							{% if orderLine.classrooms|length > 0 %}
+								<ul>
+									{% for classroom in orderLine.classrooms %}
+										<li>{{ classroom.name }}</li>
+									{% endfor %}
+								</ul>
+							{% endif %}
+						</td>
+						<td>
+							{{ orderLine.laboratoryReferance }}
+						</td>
+						<td class="text-right">
+							<form method="post" action="{{ path('dealer_order_place_remove_order_line', {'id': orderLine.id}) }}" onsubmit="return confirm('{% trans %}buttons.delete.confirm{% endtrans %}');" class="inline-block">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ orderLine.id) }}">
+								<button class="btn btn-danger">{% trans %}buttons.delete.label{% endtrans %}</button>
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<div class="alert alert-info">Sepetinizde ürün yoktur. "Ürün Ekle" butonunu kullanarak sepetinize ürün ekleyebilirsiniz.</div>
+	{% endif %}
+
+	<div class="modal modal-lg hidden" id="product-modal">
+		<div class="modal-dialog">
+			<div class="modal-header">
+				<h5 class="modal-title">Ürünler</h5>
+				<button class="modal-close">
+					<span class="material-icons-outlined">close</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="accordion">
+					{% for category in categories %}
+						<div class="accordion-item">
+							<h2 class="accordion-header">{{ category.title }}</h3>
+							<div class="accordion-collapse">
+								<table class="table">
+									<tbody>
+										{% for product in category.products %}
+											<tr>
+												<td>
+													<img src="{{ asset('uploads/products/' ~ product.imageFilename) }}" alt="{{ product.title }}" class="w-24">
+												</td>
+												<td>
+													{{ product.title }}
+												</td>
+												<td>
+													{{ product.price }}
+												</td>
+												<td class="text-right">
+													<a href="{{ path('dealer_order_place_add_order_line', {'id': product.id}) }}" class="btn btn-primary">Siparişe Ekle</a>
+												</td>
+											</tr>
+										{% else %}
+											<div class="alert alert-info">Ürün bulunamadı.</div>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					{% else %}
+						<div class="alert alert-info">
+							Kategori bulunamadı.
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

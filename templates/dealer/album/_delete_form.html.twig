@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_dealer_album_delete', {'id': album.id}) }}" onsubmit="return confirm('{% trans %}buttons.delete.confirm{% endtrans %}');" class="inline-block">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ album.id) }}">
+    <button class="btn btn-danger">{% trans %}buttons.delete.label{% endtrans %}</button>
+</form>
